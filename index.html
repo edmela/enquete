@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquête - Éducation à Madagascar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .form-content {
+            padding: 30px;
+        }
+
+        .section-title {
+            background: #f0f0f0;
+            padding: 12px 20px;
+            margin: 20px -30px 20px -30px;
+            font-weight: bold;
+            color: #333;
+            border-left: 5px solid #667eea;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .question label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .radio-option input,
+        .checkbox-option input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            background: #2ecc71;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .form-content {
+                padding: 20px;
+            }
+            
+            .section-title {
+                margin-left: -20px;
+                margin-right: -20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Enquête sur l'Éducation à Madagascar</h1>
+            <p>Questionnaire anonyme et rapide (5 minutes)</p>
+            <p>Vos réponses aideront une étude universitaire 🎓</p>
+        </div>
+
+        <form id="surveyForm" class="form-content">
+            <!-- SECTION A: PROFIL -->
+            <div class="section-title">📋 SECTION A : Votre Profil</div>
+
+            <div class="question">
+                <label>1. Âge <span class="required">*</span></label>
+                <input type="number" name="age" min="15" max="100" required>
+            </div>
+
+            <div class="question">
+                <label>2. Sexe <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="sexe" value="Homme" required>
+                        <span>Homme</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="sexe" value="Femme" required>
+                        <span>Femme</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>3. Région <span class="required">*</span></label>
+                <select name="region" required>
+                    <option value="">-- Choisir --</option>
+                    <option value="Analamanga">Analamanga</option>
+                    <option value="Diana">Diana</option>
+                    <option value="Vakinankaratra">Vakinankaratra</option>
+                    <option value="Boeny">Boeny</option>
+                    <option value="Sofia">Sofia</option>
+                    <option value="Atsinanana">Atsinanana</option>
+                    <option value="Analanjirofo">Analanjirofo</option>
+                    <option value="Vatovavy Fitovinany">Vatovavy Fitovinany</option>
+                    <option value="Haute Matsiatra">Haute Matsiatra</option>
+                    <option value="Amoron'i Mania">Amoron'i Mania</option>
+                    <option value="Atsimo Atsinanana">Atsimo Atsinanana</option>
+                    <option value="Ihorombe">Ihorombe</option>
+                    <option value="Menabe">Menabe</option>
+                    <option value="Betsiboka">Betsiboka</option>
+                    <option value="Melaky">Melaky</option>
+                    <option value="Atsimo Andrefana">Atsimo Andrefana</option>
+                    <option value="Androy">Androy</option>
+                    <option value="Anosy">Anosy</option>
+                    <option value="Alaotra Mangoro">Alaotra Mangoro</option>
+                    <option value="Bongolava">Bongolava</option>
+                    <option value="Itasy">Itasy</option>
+                    <option value="Sava">Sava</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>4. Zone <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="zone" value="Urbaine" required>
+                        <span>Urbaine (ville)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="zone" value="Rurale" required>
+                        <span>Rurale (campagne)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SECTION B: ÉDUCATION -->
+            <div class="section-title">🎓 SECTION B : Votre Éducation</div>
+
+            <div class="question">
+                <label>5. Quel est votre niveau d'études ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="niveau_etudes" value="Jamais allé à l'école" required>
+                        <span>Jamais allé à l'école</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="niveau_etudes" value="Primaire non achevé" required>
+                        <span>Primaire non achevé</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="niveau_etudes" value="Primaire (CEPE)" required>
+                        <span>Primaire (CEPE)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="niveau_etudes" value="Collège (BEPC)" required>
+                        <span>Collège (BEPC)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="niveau_etudes" value="Lycée (BACC)" required>
+                        <span>Lycée (BACC)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="niveau_etudes" value="Université/Supérieur" required>
+                        <span>Université/Supérieur</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>6. Votre domaine d'études (si applicable)</label>
+                <input type="text" name="domaine" placeholder="Ex: Commerce, Informatique, Agriculture...">
+            </div>
+
+            <!-- SECTION C: TRAVAIL -->
+            <div class="section-title">💼 SECTION C : Votre Travail</div>
+
+            <div class="question">
+                <label>7. Quelle est votre situation actuelle ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="situation" value="Employé secteur public" required>
+                        <span>Employé(e) dans le secteur public</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="situation" value="Employé secteur privé" required>
+                        <span>Employé(e) dans le secteur privé</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="situation" value="Entrepreneur" required>
+                        <span>Entrepreneur / À mon compte</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="situation" value="Étudiant" required>
+                        <span>Étudiant(e)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="situation" value="Sans emploi" required>
+                        <span>Sans emploi</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="situation" value="Autre" required>
+                        <span>Autre</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>8. Revenu mensuel approximatif <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="revenu" value="Moins de 100 000 Ar" required>
+                        <span>Moins de 100 000 Ar</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revenu" value="100 000 - 300 000 Ar" required>
+                        <span>100 000 - 300 000 Ar</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revenu" value="300 000 - 500 000 Ar" required>
+                        <span>300 000 - 500 000 Ar</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revenu" value="500 000 - 1 000 000 Ar" required>
+                        <span>500 000 - 1 000 000 Ar</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revenu" value="Plus de 1 000 000 Ar" required>
+                        <span>Plus de 1 000 000 Ar</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SECTION D: IMPACT -->
+            <div class="section-title">💡 SECTION D : Impact de l'Éducation</div>
+
+            <div class="question">
+                <label>9. L'éducation vous a-t-elle aidé à trouver un emploi/activité ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="impact_emploi" value="Oui, beaucoup" required>
+                        <span>Oui, beaucoup</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="impact_emploi" value="Un peu" required>
+                        <span>Un peu</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="impact_emploi" value="Pas vraiment" required>
+                        <span>Pas vraiment</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="impact_emploi" value="Pas du tout" required>
+                        <span>Pas du tout</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>10. L'éducation vous aide-t-elle à gérer votre argent ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="gestion_argent" value="Oui, beaucoup" required>
+                        <span>Oui, beaucoup</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="gestion_argent" value="Un peu" required>
+                        <span>Un peu</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="gestion_argent" value="Pas vraiment" required>
+                        <span>Pas vraiment</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="gestion_argent" value="Pas du tout" required>
+                        <span>Pas du tout</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>11. Grâce à l'éducation, pouvez-vous épargner ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="epargne" value="Oui, régulièrement" required>
+                        <span>Oui, régulièrement</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="epargne" value="Oui, parfois" required>
+                        <span>Oui, parfois</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="epargne" value="Non, pas assez de revenus" required>
+                        <span>Non, pas assez de revenus</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="epargne" value="Je n'épargne pas" required>
+                        <span>Je n'épargne pas</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>12. L'éducation a-t-elle amélioré vos conditions de vie ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="amelioration_vie" value="Oui, beaucoup" required>
+                        <span>Oui, beaucoup</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="amelioration_vie" value="Un peu" required>
+                        <span>Un peu</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="amelioration_vie" value="Pas encore" required>
+                        <span>Pas encore</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="amelioration_vie" value="Non" required>
+                        <span>Non</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>13. Pensez-vous que l'éducation est importante pour réussir à Madagascar ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="importance_education" value="Très important" required>
+                        <span>Très important</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="importance_education" value="Important" required>
+                        <span>Important</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="importance_education" value="Peu important" required>
+                        <span>Peu important</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="importance_education" value="Pas important" required>
+                        <span>Pas important</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>14. Principale difficulté rencontrée malgré votre éducation <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="difficulte" value="Manque d'emplois" required>
+                        <span>Manque d'emplois</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="difficulte" value="Salaires trop bas" required>
+                        <span>Salaires trop bas</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="difficulte" value="Pas de rapport entre diplôme et emploi" required>
+                        <span>Pas de rapport entre diplôme et emploi</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="difficulte" value="Manque d'opportunités" required>
+                        <span>Manque d'opportunités</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="difficulte" value="Autre" required>
+                        <span>Autre</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">📤 Envoyer mes réponses</button>
+
+            <div class="success-message" id="successMessage">
+                ✅ Merci beaucoup ! Vos réponses ont été enregistrées avec succès. 🙏
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('surveyForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {};
+            
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Ajouter timestamp
+            data.timestamp = new Date().toLocaleString('fr-FR', { timeZone: 'Indian/Antananarivo' });
+
+            // Envoyer à Google Sheets via Google Apps Script
+            // Tu devras remplacer l'URL par ton URL de déploiement
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFN7CUmqzTkLp0ajbFNzQDy-kKx2MRLKnLbfR7UgusFy_jW81e5kKTHKUMwRoURh1v/exec';
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // Afficher le message de succès
+                successMessage.classList.add('show');
+                form.reset();
+                
+                // Scroller vers le message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                // Cacher le message après 5 secondes
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+            }
+        });
+    </script>
+</body>
+</html>
